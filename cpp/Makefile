@@ -15,6 +15,11 @@ HEADERS = rendler_helper.hpp
 crawl_executor: crawl_executor.cpp $(HEADERS)
 	$(CXXLINK) $<  $(LDFLAGS) -lboost_regex -lcurl
 
+%_v1_executor: %_v1_executor.cpp rendler_v1_executor.o $(HEADERS)
+	$(CXXLINK) $< rendler_v1_executor.o $(LDFLAGS) -lboost_regex -lcurl
+
+rendler_v1: rendler_v1.cpp crawl_v1_executor render_v1_executor
+
 %: %.cpp $(HEADERS)
 	$(CXXLINK) $< $(LDFLAGS)
 

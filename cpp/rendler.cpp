@@ -96,6 +96,7 @@ public:
     for (size_t i = 0; i < offers.size(); i++) {
       const Offer& offer = offers[i];
       Resources remaining = offer.resources();
+      remaining.unallocate();
 
       static Resources TASK_RESOURCES = Resources::parse(
           "cpus:" + stringify<float>(CPUS_PER_TASK) +
