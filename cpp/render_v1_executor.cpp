@@ -60,7 +60,7 @@ protected:
     result.push_back(url);
     result.push_back(filename);
 
-    string cmd = "phantomjs  "+ renderJSPath + " " + url + " " + filename;
+    string cmd = "QT_QPA_PLATFORM=offscreen phantomjs " + renderJSPath + " " + url + " " + filename;
     assert(system(cmd.c_str()) != -1);
 
     sendFrameworkMessage(vectorToString(result));

@@ -162,8 +162,7 @@ void RendlerV1Executor::sendFrameworkMessage(const string& data)
   call.mutable_executor_id()->CopyFrom(executorId);
   call.set_type(Call::MESSAGE);
 
-  Call::Message* message = call.mutable_message();
-  message->set_data(data);
+  call.mutable_message()->set_data(data);
 
   mesos->send(call);
 }
@@ -207,7 +206,7 @@ void RendlerV1Executor::doReliableRegistration()
 
   mesos->send(call);
 
-  // Re-registrate after 1 second if not subscribed then.
+  // Re-register after one second if not subscribed by then.
   process::delay(Seconds(1), self(), &Self::doReliableRegistration);
 }
 

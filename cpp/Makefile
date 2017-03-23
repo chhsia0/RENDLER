@@ -10,12 +10,15 @@ default: all
 all: rendler crawl_executor render_executor v1
 
 HEADERS = rendler_helper.hpp
-
+HEADERS_V1 = $(HEADERS) rendler_v1_executor.hpp
 
 crawl_executor: crawl_executor.cpp $(HEADERS)
 	$(CXXLINK) $<  $(LDFLAGS) -lboost_regex -lcurl
 
-%_v1_executor: %_v1_executor.cpp rendler_v1_executor.o $(HEADERS)
+rendler_v1_executor.o: rendler_v1_executor.cpp $(HEADERS_V1)
+	$(CXXLINK) -c $<
+
+%_v1_executor: %_v1_executor.cpp rendler_v1_executor.o $(HEADERS_V1)
 	$(CXXLINK) $< rendler_v1_executor.o $(LDFLAGS) -lboost_regex -lcurl
 
 v1: rendler_v1 crawl_v1_executor render_v1_executor

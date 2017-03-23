@@ -91,7 +91,7 @@ protected:
     string baseUrl = redirectUrl.substr(0, sp); // No trailing slash.
     string dirUrl = redirectUrl.substr(0, lsp); // No trailing slash.
 
-    cout << "redirectUrl " << redirectUrl << " baseURL: " << baseUrl << endl;
+    cout << "redirectUrl " << redirectUrl << " baseUrl: " << baseUrl << endl;
     cout << "dirUrl " << dirUrl  << endl;
 
     const boost::regex hrefRE("<a\\s+[^\\>]*?href\\s*=\\s*([\"'])(.*?)\\1");
@@ -114,9 +114,11 @@ protected:
       if (link.find_first_of('#') != string::npos) {
         link.erase(link.find_first_of('#'));
       }
+
       if (link.empty()) {
         continue;
       }
+
       if (link[0] == '/') {
         link = baseUrl + link;
       } else if (!boost::regex_search(lb, le, matchService, urlRE)) {
